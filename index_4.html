@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yerzhan Baigarinov</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080c0e;
+    --surface: #0f1518;
+    --border: rgba(255,255,255,0.06);
+    --text: #f0f4f5;
+    --muted: #5a7a85;
+    --accent: #00d4aa;
+    --accent2: #0099ff;
+    --wa: #25D366;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px 48px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Ambient background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: -30%;
+    left: -20%;
+    width: 70%;
+    height: 70%;
+    background: radial-gradient(ellipse, rgba(0,212,170,0.06) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    bottom: -20%;
+    right: -20%;
+    width: 60%;
+    height: 60%;
+    background: radial-gradient(ellipse, rgba(0,153,255,0.05) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 36px;
+    animation: fadeDown 0.7s ease both;
+  }
+
+  .avatar-wrap {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+
+  .avatar {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    border: 2px solid rgba(0,212,170,0.3);
+  }
+
+  .avatar-placeholder {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0f2a25, #0a1a30);
+    border: 2px solid rgba(0,212,170,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--accent);
+    margin: 0 auto;
+  }
+
+  .status-dot {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    width: 14px;
+    height: 14px;
+    background: var(--accent);
+    border-radius: 50%;
+    border: 2px solid var(--bg);
+    animation: pulse-dot 2.5s ease infinite;
+  }
+
+  .name {
+    font-family: 'Syne', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+
+  .tagline {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+  }
+
+  .tagline span {
+    color: var(--accent);
+  }
+
+  /* Location */
+  .location {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* Links */
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .link-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.22s ease;
+    position: relative;
+    overflow: hidden;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .link-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.22s ease;
+  }
+
+  .link-item:hover {
+    transform: translateY(-2px);
+    border-color: rgba(0,212,170,0.2);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  }
+
+  .link-item:hover::before {
+    opacity: 1;
+  }
+
+  .link-item:active {
+    transform: translateY(0);
+  }
+
+  .link-item.featured {
+    border-color: rgba(37,211,102,0.25);
+    background: linear-gradient(135deg, #0a1f15, #0f1518);
+  }
+
+  .link-item.featured:hover {
+    border-color: rgba(37,211,102,0.5);
+    box-shadow: 0 8px 30px rgba(37,211,102,0.1);
+  }
+
+  .link-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .icon-wa { background: rgba(37,211,102,0.12); }
+  .icon-tg { background: rgba(0,136,204,0.12); }
+  .icon-re { background: rgba(255,100,80,0.12); }
+  .icon-sh { background: rgba(0,153,255,0.12); }
+  .icon-li { background: rgba(0,119,181,0.12); }
+  .icon-in { background: rgba(225,48,108,0.12); }
+
+  .link-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .link-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .link-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .link-arrow {
+    font-size: 14px;
+    color: var(--muted);
+    flex-shrink: 0;
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+
+  .link-item:hover .link-arrow {
+    transform: translateX(3px);
+    color: var(--accent);
+  }
+
+  /* Section label */
+  .section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0 4px;
+    margin-top: 8px;
+    margin-bottom: 2px;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    margin-top: 32px;
+    font-size: 11px;
+    color: rgba(90,122,133,0.5);
+    animation: fadeUp 0.5s 0.6s ease both;
+  }
+
+  /* Animations */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(0,212,170,0.4); }
+    50% { box-shadow: 0 0 0 5px rgba(0,212,170,0); }
+  }
+
+  .link-item:nth-child(1) { animation-delay: 0.1s; }
+  .link-item:nth-child(2) { animation-delay: 0.15s; }
+  .link-item:nth-child(3) { animation-delay: 0.2s; }
+  .link-item:nth-child(4) { animation-delay: 0.25s; }
+  .link-item:nth-child(5) { animation-delay: 0.3s; }
+  .link-item:nth-child(6) { animation-delay: 0.35s; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="avatar-wrap">
+      <div class="avatar-placeholder">YB</div>
+      <div class="status-dot"></div>
+    </div>
+    <div class="name">Yerzhan Baigarinov</div>
+    <div class="tagline">AI Automation · <span>WhatsApp Bots</span> · Real Estate Dubai</div>
+    <div class="location">📍 Dubai, UAE</div>
+  </div>
+
+  <!-- Links -->
+  <div class="links">
+
+    <div class="section-label">🤖 AI Demo</div>
+
+    <a href="https://wa.me/971523758901?text=Hi" class="link-item featured">
+      <div class="link-icon icon-wa">🤖</div>
+      <div class="link-content">
+        <div class="link-title">Chat with Ailin</div>
+        <div class="link-sub">AI WhatsApp Assistant — try it live</div>
+      </div>
+      <div class="link-arrow">→</div>
+    </a>
+
+    <div class="section-label">🏠 Projects</div>
+
+    <a href="https://yerzhandxb.lovable.app" class="link-item">
+      <div class="link-icon icon-re">🏙️</div>
+      <div class="link-content">
+        <div class="link-title">YerzhanDXB</div>
+        <div class="link-sub">Exclusive Dubai Properties Catalog</div>
+      </div>
+      <div class="link-arrow">→</div>
+    </a>
+
+    <a href="https://shuttleport.net" class="link-item">
+      <div class="link-icon icon-sh">✈️</div>
+      <div class="link-content">
+        <div class="link-title">ShuttlePort</div>
+        <div class="link-sub">VIP Airport Transfer Turkey</div>
+      </div>
+      <div class="link-arrow">→</div>
+    </a>
+
+    <div class="section-label">💬 Connect</div>
+
+    <a href="https://t.me/yerzhan2403" class="link-item">
+      <div class="link-icon icon-tg">✈️</div>
+      <div class="link-content">
+        <div class="link-title">Telegram</div>
+        <div class="link-sub">@yerzhan2403 · fastest response</div>
+      </div>
+      <div class="link-arrow">→</div>
+    </a>
+
+    <a href="https://www.linkedin.com/in/yerzhan-baigarinov" class="link-item">
+      <div class="link-icon icon-li">💼</div>
+      <div class="link-content">
+        <div class="link-title">LinkedIn</div>
+        <div class="link-sub">AI Automation Engineer</div>
+      </div>
+      <div class="link-arrow">→</div>
+    </a>
+
+    <a href="https://www.instagram.com/erzhan.real/" class="link-item">
+      <div class="link-icon icon-in">📸</div>
+      <div class="link-content">
+        <div class="link-title">Instagram</div>
+        <div class="link-sub">@erzhan.real</div>
+      </div>
+      <div class="link-arrow">→</div>
+    </a>
+
+  </div>
+
+  <div class="footer">© 2026 Yerzhan Baigarinov · Dubai, UAE</div>
+
+</div>
+</body>
+</html>
