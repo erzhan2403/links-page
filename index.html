@@ -33,7 +33,6 @@
     overflow-x: hidden;
   }
 
-  /* Ambient background */
   body::before {
     content: '';
     position: fixed;
@@ -63,7 +62,6 @@
     z-index: 1;
   }
 
-  /* Header */
   .header {
     text-align: center;
     margin-bottom: 36px;
@@ -74,15 +72,6 @@
     position: relative;
     display: inline-block;
     margin-bottom: 20px;
-  }
-
-  .avatar {
-    width: 88px;
-    height: 88px;
-    border-radius: 50%;
-    object-fit: cover;
-    display: block;
-    border: 2px solid rgba(0,212,170,0.3);
   }
 
   .avatar-placeholder {
@@ -130,11 +119,8 @@
     letter-spacing: 0.02em;
   }
 
-  .tagline span {
-    color: var(--accent);
-  }
+  .tagline span { color: var(--accent); }
 
-  /* Location */
   .location {
     display: inline-flex;
     align-items: center;
@@ -144,7 +130,6 @@
     color: var(--muted);
   }
 
-  /* Links */
   .links {
     display: flex;
     flex-direction: column;
@@ -182,13 +167,8 @@
     box-shadow: 0 8px 30px rgba(0,0,0,0.3);
   }
 
-  .link-item:hover::before {
-    opacity: 1;
-  }
-
-  .link-item:active {
-    transform: translateY(0);
-  }
+  .link-item:hover::before { opacity: 1; }
+  .link-item:active { transform: translateY(0); }
 
   .link-item.featured {
     border-color: rgba(37,211,102,0.25);
@@ -198,6 +178,16 @@
   .link-item.featured:hover {
     border-color: rgba(37,211,102,0.5);
     box-shadow: 0 8px 30px rgba(37,211,102,0.1);
+  }
+
+  .link-item.new {
+    border-color: rgba(0,212,170,0.25);
+    background: linear-gradient(135deg, #0a1f1a, #0f1518);
+  }
+
+  .link-item.new:hover {
+    border-color: rgba(0,212,170,0.5);
+    box-shadow: 0 8px 30px rgba(0,212,170,0.1);
   }
 
   .link-icon {
@@ -214,14 +204,13 @@
   .icon-wa { background: rgba(37,211,102,0.12); }
   .icon-tg { background: rgba(0,136,204,0.12); }
   .icon-re { background: rgba(255,100,80,0.12); }
-  .icon-sh { background: rgba(0,153,255,0.12); }
   .icon-li { background: rgba(0,119,181,0.12); }
   .icon-in { background: rgba(225,48,108,0.12); }
+  .icon-ck { background: rgba(0,212,170,0.12); }
+  .icon-yt { background: rgba(255,0,0,0.12); }
+  .icon-tt { background: rgba(255,255,255,0.08); }
 
-  .link-content {
-    flex: 1;
-    min-width: 0;
-  }
+  .link-content { flex: 1; min-width: 0; }
 
   .link-title {
     font-family: 'Syne', sans-serif;
@@ -231,6 +220,21 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .badge-new {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: rgba(0,212,170,0.15);
+    color: var(--accent);
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
   }
 
   .link-sub {
@@ -251,7 +255,6 @@
     color: var(--accent);
   }
 
-  /* Section label */
   .section-label {
     font-size: 10px;
     font-weight: 600;
@@ -264,7 +267,6 @@
     animation: fadeUp 0.5s ease both;
   }
 
-  /* Footer */
   .footer {
     text-align: center;
     margin-top: 32px;
@@ -273,7 +275,6 @@
     animation: fadeUp 0.5s 0.6s ease both;
   }
 
-  /* Animations */
   @keyframes fadeDown {
     from { opacity: 0; transform: translateY(-16px); }
     to { opacity: 1; transform: translateY(0); }
@@ -295,23 +296,23 @@
   .link-item:nth-child(4) { animation-delay: 0.25s; }
   .link-item:nth-child(5) { animation-delay: 0.3s; }
   .link-item:nth-child(6) { animation-delay: 0.35s; }
+  .link-item:nth-child(7) { animation-delay: 0.4s; }
+  .link-item:nth-child(8) { animation-delay: 0.45s; }
 </style>
 </head>
 <body>
 <div class="container">
 
-  <!-- Header -->
   <div class="header">
     <div class="avatar-wrap">
       <div class="avatar-placeholder">YB</div>
       <div class="status-dot"></div>
     </div>
     <div class="name">Yerzhan Baigarinov</div>
-    <div class="tagline">AI Automation · <span>WhatsApp Bots</span> · Real Estate Dubai</div>
+    <div class="tagline">AI Automation · <span>SaaS Builder</span> · Real Estate Dubai</div>
     <div class="location">📍 Dubai, UAE</div>
   </div>
 
-  <!-- Links -->
   <div class="links">
 
     <div class="section-label">🤖 AI Demo</div>
@@ -325,22 +326,22 @@
       <div class="link-arrow">→</div>
     </a>
 
-    <div class="section-label">🏠 Projects</div>
+    <div class="section-label">🚀 Projects</div>
+
+    <a href="https://chunkit.yerzhan.online" class="link-item new">
+      <div class="link-icon icon-ck">⚡</div>
+      <div class="link-content">
+        <div class="link-title">ChunkIt <span class="badge-new">New</span></div>
+        <div class="link-sub">Turn PDFs into RAG Datasets for AI Bots</div>
+      </div>
+      <div class="link-arrow">→</div>
+    </a>
 
     <a href="https://yerzhandxb.lovable.app" class="link-item">
       <div class="link-icon icon-re">🏙️</div>
       <div class="link-content">
         <div class="link-title">YerzhanDXB</div>
         <div class="link-sub">Exclusive Dubai Properties Catalog</div>
-      </div>
-      <div class="link-arrow">→</div>
-    </a>
-
-    <a href="https://shuttleport.net" class="link-item">
-      <div class="link-icon icon-sh">✈️</div>
-      <div class="link-content">
-        <div class="link-title">ShuttlePort</div>
-        <div class="link-sub">VIP Airport Transfer Turkey</div>
       </div>
       <div class="link-arrow">→</div>
     </a>
@@ -365,11 +366,29 @@
       <div class="link-arrow">→</div>
     </a>
 
-    <a href="https://www.instagram.com/erzhan.real/" class="link-item">
+    <a href="https://www.instagram.com/yerzhan.ai/" class="link-item">
       <div class="link-icon icon-in">📸</div>
       <div class="link-content">
         <div class="link-title">Instagram</div>
-        <div class="link-sub">@erzhan.real</div>
+        <div class="link-sub">@yerzhan.ai</div>
+      </div>
+      <div class="link-arrow">→</div>
+    </a>
+
+    <a href="https://www.youtube.com/@yerzhan_ai" class="link-item">
+      <div class="link-icon icon-yt">▶️</div>
+      <div class="link-content">
+        <div class="link-title">YouTube</div>
+        <div class="link-sub">@yerzhan_ai</div>
+      </div>
+      <div class="link-arrow">→</div>
+    </a>
+
+    <a href="https://www.tiktok.com/@yerzhan_ai" class="link-item">
+      <div class="link-icon icon-tt">🎵</div>
+      <div class="link-content">
+        <div class="link-title">TikTok</div>
+        <div class="link-sub">@yerzhan_ai</div>
       </div>
       <div class="link-arrow">→</div>
     </a>
